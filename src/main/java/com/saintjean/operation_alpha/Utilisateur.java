@@ -26,7 +26,7 @@ public class Utilisateur {
     private String ville;
     private double soldePersonnel;
 
-    private static ArrayList<Utilisateur> users = new ArrayList<>();
+    static ArrayList<Utilisateur> users = new ArrayList<>();
 
     public Utilisateur(int id, String nom, int age, String email, String telephone, String ville, double soldePersonnel) {
         this.id = id;
@@ -112,4 +112,8 @@ public class Utilisateur {
             System.out.println("Utilisateur non trouvé : ID " + id);
         }
     }
+    public static ArrayList<Utilisateur> getUsers() {
+        return users;
+    }
+
 }
