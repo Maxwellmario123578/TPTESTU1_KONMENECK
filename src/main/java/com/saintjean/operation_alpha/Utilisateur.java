@@ -2,6 +2,20 @@ package com.saintjean.operation_alpha;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.regex.Pattern;
+
+// Exceptions personnalisées
+class EmailInvalidException extends Exception {
+    public EmailInvalidException(String message) {
+        super(message);
+    }
+}
+
+class SuppressionInvalidException extends Exception {
+    public SuppressionInvalidException(String message) {
+        super(message);
+    }
+}
 
 public class Utilisateur {
     private int id;
@@ -12,7 +26,6 @@ public class Utilisateur {
     private String ville;
     private double soldePersonnel;
 
-    // Liste statique pour stocker tous les utilisateurs
     private static ArrayList<Utilisateur> users = new ArrayList<>();
 
     public Utilisateur(int id, String nom, int age, String email, String telephone, String ville, double soldePersonnel) {
@@ -25,7 +38,7 @@ public class Utilisateur {
         this.soldePersonnel = soldePersonnel;
     }
 
-    // Getters
+    // Getters et Setters
     public int getId() { return id; }
     public String getNom() { return nom; }
     public int getAge() { return age; }
@@ -34,7 +47,6 @@ public class Utilisateur {
     public String getVille() { return ville; }
     public double getSoldePersonnel() { return soldePersonnel; }
 
-    // Setters
     public void setNom(String nom) { this.nom = nom; }
     public void setAge(int age) { this.age = age; }
     public void setEmail(String email) { this.email = email; }
@@ -42,16 +54,23 @@ public class Utilisateur {
     public void setVille(String ville) { this.ville = ville; }
     public void setSoldePersonnel(double soldePersonnel) { this.soldePersonnel = soldePersonnel; }
 
-    // Méthodes demandées
+    // Validation email
+    private static void validerEmail(String email) throws EmailInvalidException {
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        if (!Pattern.matches(regex, email)) {
+            throw new EmailInvalidException("Email invalide : " + email);
+        }
+    }
 
-    // Ajouter un utilisateur
-    public static void ajouter(Utilisateur user) {
+    // Ajouter un utilisateur avec validation email
+    public static void ajouter(Utilisateur user) throws EmailInvalidException {
+        validerEmail(user.getEmail());
         users.add(user);
         System.out.println("Utilisateur ajouté : " + user.getNom());
     }
 
-    // Supprimer un utilisateur par ID
-    public static void supprimer(int id) {
+    // Supprimer un utilisateur par ID avec exception si inexistant
+    public static void supprimer(int id) throws SuppressionInvalidException {
         Optional<Utilisateur> userOpt = users.stream()
                 .filter(u -> u.getId() == id)
                 .findFirst();
@@ -59,7 +78,7 @@ public class Utilisateur {
             users.remove(userOpt.get());
             System.out.println("Utilisateur supprimé : ID " + id);
         } else {
-            System.out.println("Utilisateur non trouvé : ID " + id);
+            throw new SuppressionInvalidException("Impossible de supprimer : utilisateur ID " + id + " inexistant");
         }
     }
 
