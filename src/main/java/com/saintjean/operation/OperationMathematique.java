@@ -7,9 +7,9 @@ public class OperationMathematique {
 		return nombre>0;
 		
 	}
-	public static long factorielle(int n) throws FactorielInvalidException {
+	public static long factorielle(int n) throws IllegalParamISIException {
         if (n < 0) {
-            throw new FactorielInvalidException("Le nombre doit être positif");
+            throw new IllegalParamISIException("Le nombre doit être positif");
         }
         if(n==0) { 
         	return 1;
