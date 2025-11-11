@@ -25,7 +25,7 @@ class TestOperationMathematique {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
-	
+
 	@Test
 	
 	void testestpositif() {
@@ -45,5 +45,4 @@ class TestOperationMathematique {
 		assertEquals(1,OperationMathematique.factorielle(-45));
 		
 	}
-
 }

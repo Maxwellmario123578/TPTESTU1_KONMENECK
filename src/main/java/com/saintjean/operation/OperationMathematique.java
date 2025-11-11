@@ -5,7 +5,7 @@ public class OperationMathematique {
 	public static boolean estPositif(int nombre) {
 		return nombre>0;
 		
-	}
+	} 
 	public static long factorielle(int n) throws FactorielInvalidException {
         if (n < 0) {
             throw new FactorielInvalidException("Le nombre doit être positif");
