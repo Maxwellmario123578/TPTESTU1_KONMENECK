@@ -31,5 +31,11 @@ public class OperationMathematique {
 	    }
 	    return liste;
 	}
+    public static double maxNumba(double[] tab) {
+        if (tab == null || tab.length == 0) {
+            throw new IllegalArgumentException("Le tableau ne doit pas être vide ou null");
+        }
+        return Arrays.stream(tab).max().getAsDouble();
+    }
 
 }
