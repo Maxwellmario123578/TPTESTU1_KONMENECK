@@ -25,7 +25,18 @@ class TestOperationMathematique {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
+	@Test
+    void testduTrie() {
+        int[] tableau = {5, 2, 9, 1, 7};
+        int[] attendu = {9, 7, 5, 2, 1};
+        int [] tableau_1= {2,8,1,0,11,45};
+        int [] attendu_1= {0,1,2,8,45,11};
 
+        int[] resultat = OperationMathematique.trier(tableau);
+        int[] resultat_1=OperationMathematique.trier(tableau_1);
+        assertArrayEquals(attendu, resultat, "Le tableau doit être trié par ordre décroissant");
+        assertArrayEquals(attendu_1, resultat_1, "Le tableau doit être trié par ordre décroissant");
+    }
 	@Test
 	
 	void testestpositif() {
