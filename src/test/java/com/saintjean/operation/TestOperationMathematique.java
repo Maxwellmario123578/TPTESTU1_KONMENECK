@@ -26,6 +26,21 @@ class TestOperationMathematique {
 	void tearDown() throws Exception {
 	}
 	@Test
+	void testmasNumba() {
+        double[] tableau1 = {1.5, 3.2, 7.8, 2.1};
+        assertEquals(7.8, OperationMathematique.maxNumba(tableau1));
+
+        double[] tableau2 = {-5.0, -2.1, -9.3, -0.5};
+        assertEquals(-0.5, OperationMathematique.maxNumba(tableau2));
+
+        double[] tableau3 = {-1.2, 3.4, 0.0, 2.1};
+        assertEquals(3.4, OperationMathematique.maxNumba(tableau3));
+
+        double[] tableau4 = {42.0};
+        assertEquals(42.0, OperationMathematique.maxNumba(tableau4));
+
+    }
+	@Test
     void testduTrie() {
         int[] tableau = {5, 2, 9, 1, 7};
         int[] attendu = {9, 7, 5, 2, 1};
