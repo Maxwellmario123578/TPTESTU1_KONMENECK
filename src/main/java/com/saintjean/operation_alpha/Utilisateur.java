@@ -17,6 +17,13 @@ class SuppressionInvalidException extends Exception {
     }
 }
 
+// Nouvelle exception pour le solde général négatif
+class NegativeGeneralBalanceException extends Exception {
+    public NegativeGeneralBalanceException(String message) {
+        super(message);
+    }
+}
+
 public class Utilisateur {
     private int id;
     private String nom;
@@ -111,5 +118,33 @@ public class Utilisateur {
         } else {
             System.out.println("Utilisateur non trouvé : ID " + id);
         }
+    }
+
+
+    public static double analyseSoldeGeneral() throws NegativeGeneralBalanceException {
+        double total = users.stream().mapToDouble(Utilisateur::getSoldePersonnel).sum();
+        if (total < 0) {
+            throw new NegativeGeneralBalanceException("Solde général négatif : " + total);
+        }
+        System.out.println("Solde général des utilisateurs : " + total);
+        return total;
+    }
+
+
+    public static Utilisateur getUtilisateurLePlusRiche() {
+        if (users.isEmpty()) {
+            System.out.println("Aucun utilisateur enregistré.");
+            return null;
+        }
+        Utilisateur riche = users.stream()
+                .max((u1, u2) -> Double.compare(u1.getSoldePersonnel(), u2.getSoldePersonnel()))
+                .orElse(null);
+        System.out.println("Utilisateur le plus riche : " + riche.getNom() + " avec " + riche.getSoldePersonnel());
+        return riche;
+    }
+
+    // Getter pour les tests
+    public static ArrayList<Utilisateur> getUsers() {
+        return users;
     }
 }
