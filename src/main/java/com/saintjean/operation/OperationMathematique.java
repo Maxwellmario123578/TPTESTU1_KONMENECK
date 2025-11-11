@@ -1,8 +1,8 @@
-package operation;
+package com.saintjean.operation;
 
 
 public class OperationMathematique {
-	Boolean estPositif(int nombre) {
+	public static boolean estPositif(int nombre) {
 		return nombre>0;
 		
 	}
@@ -12,7 +12,7 @@ public class OperationMathematique {
         }
         if(n==0) {
         	return 1;
-        }
+        } 
 
         long resultat = 1;
         for (int i = 1; i <= n; i++) {
